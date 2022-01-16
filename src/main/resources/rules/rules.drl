@@ -8,14 +8,7 @@ global org.slf4j.Logger logger
 
 rule "My first rule"
     when
-        Customer($name:name, age < 18)
+        Customer($name:name, age > 18)
     then
         logger.info("My first rule works!");
-end
-
-rule "My second rule"
-     when
-        Customer($name:name, age >= 18)
-     then
-        logger.info("My second rule works!");
 end
