@@ -4,7 +4,7 @@ import org.kie.api.runtime.KieContainer
 import org.kie.api.runtime.rule.FactHandle
 import org.scalatest.Matchers.convertToAnyShouldWrapper
 import org.scalatest.flatspec.AnyFlatSpec
-import org.slf4j.{Logger, LoggerFactory}
+import org.slf4j.LoggerFactory
 
 import scala.collection.mutable
 

@@ -3,7 +3,6 @@ package rules
 dialect "java"
 
 import model.Customer
-import scala.collection.mutable.Map
 global org.slf4j.Logger logger
 
 rule "My first rule"
