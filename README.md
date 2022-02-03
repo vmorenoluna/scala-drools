@@ -11,5 +11,5 @@ The end result is a model class that behaves exactly like a JavaBean, so interop
 
 - Don't use fat jar with drools, switch to sbt-native-packager
 - Scala case classes are perfect for your rules
-- Use only java collections within the classes used by your rules. Avoid the scala collections in that precise case but rely on collection.JavaConversions._ implicits to hide that restriction.
+- Use only java collections within the classes used by your rules. Avoid the scala collections in that precise case but rely on scala.jdk.CollectionConverters._ implicits to hide that restriction.
 - In knowledge bases only use declarative classes (declare) for internal usage, such as intermediary reasoning state.
