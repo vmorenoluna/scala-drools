@@ -3,6 +3,13 @@ package rules
 dialect "java"
 
 import model.Customer
+import model.CustomerData
+import model.CreditLine
+import model.Application
+import model.PendingApplication
+import model.ApprovedApplication
+import model.UnapprovedApplication
+
 global org.slf4j.Logger logger
 
 rule "My first rule"
@@ -10,4 +17,45 @@ rule "My first rule"
         Customer($name:name, age > 18)
     then
         logger.info("My first rule works!");
+end
+
+rule "Customers with a credit score between 300 and 500 get a standard line of credit"
+    when
+        not( exists ( ApprovedApplication() ) )
+        not( exists ( UnapprovedApplication() ) )
+
+        $customer : CustomerData( creditScore <= 500, creditScore >= 300 )
+        $pendingApplication : Application( customerId == $customer.id )
+    then
+        CreditLine creditLine = new CreditLine( $customer, 10000 );
+
+        insert( $pendingApplication.approved( creditLine ) );
+        delete( $pendingApplication );
+end
+
+rule "Customers with a credit score above 500 get an extended line of credit"
+    when
+        not( exists ( ApprovedApplication() ) )
+        not( exists ( UnapprovedApplication() ) )
+
+        $customer : CustomerData( creditScore > 500 )
+        $pendingApplication : Application( customerId == $customer.id )
+    then
+        CreditLine creditLine = new CreditLine( $customer, 15000 );
+
+        insert( $pendingApplication.approved( creditLine ) );
+        delete( $pendingApplication );
+end
+
+rule "Customers with a credit score less than 300 get denied a line of credit"
+    when
+        not( exists ( ApprovedApplication() ) )
+        not( exists ( UnapprovedApplication() ) )
+
+        $customer : CustomerData( creditScore < 300 )
+        $pendingApplication : Application( customerId == $customer.id )
+
+    then
+        insert( $pendingApplication.unapproved() );
+        delete( $pendingApplication );
 end
