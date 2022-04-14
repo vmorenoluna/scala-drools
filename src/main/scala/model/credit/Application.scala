@@ -1,4 +1,4 @@
-package model
+package model.credit
 
 import scala.beans.BeanProperty
 

@@ -1,14 +1,14 @@
-package rules
+package rules.creditRules
 
 dialect "java"
 
-import model.Customer
-import model.CustomerData
-import model.CreditLine
-import model.Application
-import model.PendingApplication
-import model.ApprovedApplication
-import model.UnapprovedApplication
+import model.credit.Customer
+import model.credit.CustomerData
+import model.credit.CreditLine
+import model.credit.Application
+import model.credit.PendingApplication
+import model.credit.ApprovedApplication
+import model.credit.UnapprovedApplication
 
 global org.slf4j.Logger logger
 

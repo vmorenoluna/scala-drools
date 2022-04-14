@@ -1,4 +1,4 @@
-import model.{Application, CreditLine, Customer, CustomerData, PendingApplication}
+import model.credit.{Application, CreditLine, Customer, CustomerData, PendingApplication}
 import org.drools.core.ClassObjectFilter
 import org.kie.api.event.rule.{ObjectDeletedEvent, ObjectInsertedEvent, ObjectUpdatedEvent, RuleRuntimeEventListener}
 import org.kie.api.runtime.KieContainer
@@ -8,7 +8,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.slf4j.LoggerFactory
 
 
-class RulesTest extends AnyFlatSpec {
+class CreditRulesTest extends AnyFlatSpec {
 
   private val kieContainer: KieContainer = KnowledgeSessionHelper.createRuleBase()
 
@@ -27,7 +27,7 @@ class RulesTest extends AnyFlatSpec {
           println(s"Object deleted: ${event.getOldObject.toString}")
       }
     )
-    statefulSession.setGlobal("logger", LoggerFactory.getLogger(classOf[RulesTest]))
+    statefulSession.setGlobal("logger", LoggerFactory.getLogger(classOf[CreditRulesTest]))
     val customer: Customer       = new Customer("Vincenzo", 16)
     val factHandle: FactHandle = statefulSession.insert(customer)
     statefulSession.fireAllRules()
