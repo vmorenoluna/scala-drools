@@ -1,4 +1,4 @@
-package shopRules
+package rules.shopRules
 
 dialect "java"
 
@@ -35,7 +35,7 @@ rule "Infer LoyalCustomer 1"
     when
         $user: User(purchasedItems >= 3, purchasedItems < 5)
     then
-        logger.info("User " + $user.getId() + "has now level 1 discount");
+        logger.info("User " + $user.getId() + " has now level 1 discount");
         insertLogical(new LoyalCustomer($user, 1));
 end
 
@@ -43,7 +43,7 @@ rule "Infer LoyalCustomer 2"
     when
         $user: User(purchasedItems >= 5)
     then
-        logger.info("User " + $user.getId() + "has now level 2 discount");
+        logger.info("User " + $user.getId() + " has now level 2 discount");
         insertLogical(new LoyalCustomer($user, 2));
 end
 
