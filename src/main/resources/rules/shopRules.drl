@@ -1,0 +1,52 @@
+package shopRules
+
+dialect "java"
+
+import model.shop.User
+import model.shop.Purchase
+import model.shop.ItemReturn
+import model.shop.LoyalCustomer
+
+global org.slf4j.Logger logger
+
+rule "Register a purchase"
+    when
+        $purchase: Purchase($user: user, $numberOfItems: numberOfItems)
+    then
+        logger.info("User " + $user.getId() + " is purchasing " + $numberOfItems + " items");
+        modify( $user ) {
+                setPurchasedItems( $user.getPurchasedItems() + $numberOfItems )
+        }
+        delete( $purchase )
+end
+
+rule "Accept a return"
+     when
+        $itemReturn: ItemReturn($user: user, $numberOfReturns: numberOfReturns)
+     then
+        logger.info("User " + $user.getId() + " is returning " + $numberOfReturns + " items");
+        modify( $user ) {
+                setPurchasedItems( $user.getPurchasedItems() - $numberOfReturns )
+        }
+        delete( $itemReturn )
+end
+
+rule "Infer LoyalCustomer 1"
+    when
+        $user: User(purchasedItems >= 3, purchasedItems < 5)
+    then
+        logger.info("User " + $user.getId() + "has now level 1 discount");
+        insertLogical(new LoyalCustomer($user, 1));
+end
+
+rule "Infer LoyalCustomer 2"
+    when
+        $user: User(purchasedItems >= 5)
+    then
+        logger.info("User " + $user.getId() + "has now level 2 discount");
+        insertLogical(new LoyalCustomer($user, 2));
+end
+
+
+
+

@@ -6,4 +6,8 @@
         <ksession name="my-first-ksession" default="true" />
     </kbase>
 
+    <kbase name="shop" equalsBehavior="identity" packages="shopRules">
+        <ksession name="my-shop-ksession" default="true" />
+    </kbase>
+
 </kmodule>

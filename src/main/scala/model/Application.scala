@@ -2,21 +2,19 @@ package model
 
 import scala.beans.BeanProperty
 
-
 case class CustomerData(
-                         @BeanProperty
-                         id: String,
-                         @BeanProperty
-                         creditScore: Int
-                       )
+    @BeanProperty
+    id: String,
+    @BeanProperty
+    creditScore: Int
+)
 
 case class CreditLine(
-                       @BeanProperty
-                       customerData: CustomerData,
-                       @BeanProperty
-                       creditLimit: Int
-                     )
-
+    @BeanProperty
+    customerData: CustomerData,
+    @BeanProperty
+    creditLimit: Int
+)
 
 trait Application {
 
@@ -33,23 +31,22 @@ trait Application {
 }
 
 case class PendingApplication(
-                               @BeanProperty
-                               customerId: String,
-                               @BeanProperty
-                               creditLine: Option[CreditLine] = None
-                             ) extends Application
+    @BeanProperty
+    customerId: String,
+    @BeanProperty
+    creditLine: Option[CreditLine] = None
+) extends Application
 
 case class ApprovedApplication(
-                                @BeanProperty
-                                customerId: String,
-                                @BeanProperty
-                                creditLine: Option[CreditLine]
-                              ) extends Application
+    @BeanProperty
+    customerId: String,
+    @BeanProperty
+    creditLine: Option[CreditLine]
+) extends Application
 
 case class UnapprovedApplication(
-                                  @BeanProperty
-                                  customerId: String,
-                                  @BeanProperty
-                                  creditLine: Option[CreditLine] = None
-                                ) extends Application
-
+    @BeanProperty
+    customerId: String,
+    @BeanProperty
+    creditLine: Option[CreditLine] = None
+) extends Application
