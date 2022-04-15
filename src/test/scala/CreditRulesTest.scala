@@ -7,14 +7,14 @@ import org.scalatest.Matchers.convertToAnyShouldWrapper
 import org.scalatest.flatspec.AnyFlatSpec
 import org.slf4j.LoggerFactory
 
-
+// TODO
 class CreditRulesTest extends AnyFlatSpec {
 
   private val kieContainer: KieContainer = KnowledgeSessionHelper.createRuleBase()
 
   "test1" should "work" in {
 
-    val statefulSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kieContainer, "my-first-ksession")
+    val statefulSession = KnowledgeSessionHelper.getStatefulKnowledgeSession(kieContainer, "my-credit-ksession")
     statefulSession.addEventListener(
       new RuleRuntimeEventListener {
         override def objectInserted(event: ObjectInsertedEvent): Unit =
@@ -28,7 +28,7 @@ class CreditRulesTest extends AnyFlatSpec {
       }
     )
     statefulSession.setGlobal("logger", LoggerFactory.getLogger(classOf[CreditRulesTest]))
-    val customer: Customer       = new Customer("Vincenzo", 16)
+    val customer: Customer       = new Customer("Pablo", 16)
     val factHandle: FactHandle = statefulSession.insert(customer)
     statefulSession.fireAllRules()
     customer.setAge(20)
@@ -49,7 +49,7 @@ class CreditRulesTest extends AnyFlatSpec {
       // set up example Customer data
 
 
-      val session = kieContainer.newKieSession( "my-first-ksession" )
+      val session = kieContainer.newKieSession( "my-credit-ksession" )
       session.insert( application )
       session.insert( customerData )
       session.fireAllRules()
