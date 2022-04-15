@@ -10,4 +10,8 @@
         <ksession name="my-shop-ksession" />
     </kbase>
 
+    <kbase name="shop-dsl" equalsBehavior="identity" packages="rules.shopRules.dsl">
+        <ksession name="my-shop-dsl-ksession" />
+    </kbase>
+
 </kmodule>

@@ -1,0 +1,39 @@
+package rules.shopRules.dsl
+
+import model.shop.User
+import model.shop.Purchase
+import model.shop.ItemReturn
+import model.shop.LoyalCustomer
+
+global org.slf4j.Logger logger
+
+rule "Register a purchase"
+    when
+        a user is doing a purchase
+    then
+       register the purchase
+end
+
+rule "Accept a return"
+     when
+        a user is returning items
+     then
+        register the return
+end
+
+rule "Infer LoyalCustomer 1"
+    when
+        a user has
+            - purchasedItems greater than or equal to 3
+            - purchasedItems less than 5
+    then
+        issue loyal customer status of level 1
+end
+
+rule "Infer LoyalCustomer 2"
+    when
+        a user has
+            - purchasedItems greater than or equal to 5
+    then
+        issue loyal customer status of level 2
+end
