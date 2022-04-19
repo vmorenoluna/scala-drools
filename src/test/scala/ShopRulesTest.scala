@@ -50,6 +50,8 @@ class ShopRulesTest extends AnyFlatSpec {
     loyalCustomerObjects3.size() shouldBe 1
     loyalCustomerObjects3.iterator().next() shouldBe LoyalCustomer(user, level = 1)
 
+    statefulSession.dispose()
+
   }
 
 }

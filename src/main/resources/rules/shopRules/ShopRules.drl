@@ -17,7 +17,7 @@ rule "Register a purchase"
         modify( $user ) {
                 setPurchasedItems( $user.getPurchasedItems() + $numberOfItems )
         }
-        delete( $purchase )
+        delete( $purchase );
 end
 
 rule "Accept a return"
@@ -28,7 +28,7 @@ rule "Accept a return"
         modify( $user ) {
                 setPurchasedItems( $user.getPurchasedItems() - $numberOfReturns )
         }
-        delete( $itemReturn )
+        delete( $itemReturn );
 end
 
 rule "Infer LoyalCustomer 1"
